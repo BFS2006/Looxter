@@ -56,11 +56,13 @@ function logadoHome() {
         if (foto) {
             // Limpa o conteúdo anterior
             fotoPerfil.innerHTML = "";
-
+            fotoPerfil.setAttribute("onclick", "irPerfil()");
             fotoPerfil.innerHTML = `
-            <img id="paraPerfil" src="${foto}" class="imagemPerfil" style="cursor: pointer; alt="" onclick="irPerfil()">
+            <img id="paraPerfil" src="${foto}" class="imagemPerfil" style="cursor: pointer; alt="">
 
-            <span id="paraPerfil" style="font-size: 15px; cursor: pointer;" onclick="irPerfil()">${nome}</span>
+            <marquee direction="right">
+            <span id="paraPerfil" style="font-size: 15px; cursor: pointer;">${nome}</span>
+            </marquee>
             `
 
             // // Cria um novo elemento de imagem
@@ -77,7 +79,13 @@ function logadoHome() {
             var nome = localStorage.getItem("nome")
             console.log("Nenhuma foto de perfil encontrada.");
             fotoPerfil.innerHTML = "";
-            fotoPerfil.innerHTML = `<i class="bi bi-person-circle" cursor: pointer;" onclick="irPerfil()"></i><span cursor: pointer;" onclick="irPerfil()">${nome}</span>`
+            fotoPerfil.setAttribute("onclick", "irPerfil()");
+            fotoPerfil.innerHTML = `<i class="bi bi-person-circle" cursor: pointer;" ></i>
+            <marquee direction="right">
+            
+            <span cursor: pointer;">${nome}</span>
+            </marquee>
+            `
         }
     } else {
         console.log("Usuário não está logado.");

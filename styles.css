@@ -148,8 +148,9 @@ header {
             align-items: center;
         }
         .imagemPerfil {
+            object-fit: cover;
             border: 2px solid #f2b035;
-            width: 50px;
+            width: 60px;
             height: 50px;
             border-radius: 100%;
         }
@@ -723,6 +724,13 @@ main {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+            }
+            .imagemPerfil {
+                object-fit: cover;
+                border: 2px solid #f2b035;
+                width: 70px;
+                height: 45px;
+                border-radius: 100%;
             }
             .spans {
                 font-size: 20px;

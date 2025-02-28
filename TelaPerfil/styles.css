@@ -2,8 +2,36 @@ body {
     color: white;
     font-family: sans-serif;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    height: 98dvh;
+    width: 100%;
+    background-color:#021f59;
+    margin: 0;
+    padding: 0;
+}
+
+.imagemPerfil {
+    border: 2px solid #F2541B;
+    border-radius: 10px;
+    margin: 1.5rem;
+    margin-top: 1rem;
+    display: flex;
     justify-content: center;
     align-items: center;
-    height: 98dvh;
-    background-color:#021f59;
+    flex-direction: column;
+    width: 97%;
+    height: 225px;
+    background-color: #081226;
+    img {
+        border: 2px solid #F2541B;
+        border-radius: 100%;
+        object-fit: cover;
+        width: 150px;
+        height: 150px;
+    }
+    h1 {
+        font-size: 20px;
+    }
 }
