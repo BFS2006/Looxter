@@ -148,8 +148,9 @@ header {
             align-items: center;
         }
         .imagemPerfil {
+            border: 2px solid #f2b035;
             width: 50px;
-            height: 60px;
+            height: 50px;
             border-radius: 100%;
         }
         .spans {
@@ -164,6 +165,54 @@ header {
                 }
             }
         }
+        .toggle-area1 {
+            cursor: pointer;
+            background-color: #081226bb;
+            animation: togglebaixo 0.5s ease-in-out forwards;
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 75px;
+            right: 2rem;
+            backdrop-filter: blur(15px);
+            width: 300px;
+            height: 200px;
+            border-radius: 10px;
+            border: 2px solid rgba(242, 176, 53, 0.747);
+            /* border: 2px solid rgba(182, 182, 182, 0.747); */
+    
+            ul {
+                list-style: none;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                li {
+                    color: #f2541b;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-grow: 1;
+                    font-size: 20px;
+                    width: 100%;
+                    height: 100%;
+                    border-bottom: 2px solid #f2b035;
+                    h4 {
+                        /* text-align: left; */
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 0;
+                        padding: 0;
+                    }
+                }
+            }
+        }
     }
 
 /* .search-input {
@@ -174,6 +223,27 @@ header {
     font-size: 20px;
     background-color: #e3f3fc;
 } */
+
+@keyframes togglebaixo {
+    0% {
+        backdrop-filter: blur(0px);
+        transform: translateY(-350px);
+    }
+    100% {
+        backdrop-filter: blur(10px);
+        transform: translateY(0);
+    }
+}
+@keyframes togglecima {
+    0% {
+        backdrop-filter: blur(10px);
+        transform: translateY(0);
+    }
+    100% {
+        backdrop-filter: blur(0px);
+        transform: translateY(-1050px);
+    }
+}
 
 @keyframes toggleDireita {
     0% {
