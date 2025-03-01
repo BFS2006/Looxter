@@ -142,8 +142,13 @@ window.onload = function() {
         // Aqui você pode fazer o que precisar para exibir informações do usuário, etc.
     } else {
         console.log("Usuário não está logado.");
+        redirecionarLogin()
         // Aqui você pode redirecionar para a página de login, se necessário
     }
+}
+
+function redirecionarLogin() {
+    window.location.href = "./login2/index.html";
 }
 
 function redirecionarPerfil() {
