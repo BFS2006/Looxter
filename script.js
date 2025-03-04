@@ -225,13 +225,16 @@ function exibirItensLocalStorage() {
         const chave = localStorage.key(i); // Pega a chave do item
         const valor = localStorage.getItem(chave); // Pega o valor (HTML) do item
 
-        // Acumula o conteúdo HTML
-        htmlContent += valor;
+        // Verifica se a chave começa com "item_" antes de adicionar o conteúdo
+        if (chave.startsWith("item_")) {
+            htmlContent += valor; // Adiciona o conteúdo HTML do item que corresponde ao padrão
+        }
     }
 
     // Atualiza o conteúdo de espaçoPubli de uma vez só
     espaçoPubli.innerHTML = htmlContent;
 }
+
 
 // Espera o DOM estar carregado antes de adicionar o listener
 document.addEventListener("DOMContentLoaded", function() {
