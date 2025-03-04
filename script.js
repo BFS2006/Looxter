@@ -60,7 +60,7 @@ function logadoHome() {
             fotoPerfil.innerHTML = `
             <img id="paraPerfil" src="${foto}" class="imagemPerfil" style="cursor: pointer; alt="">
 
-            <marquee direction="right">
+            <marquee direction="right" style="cursor: pointer;">
             <span id="paraPerfil" style="font-size: 15px; cursor: pointer;">${nome}</span>
             </marquee>
             `
@@ -81,7 +81,7 @@ function logadoHome() {
             fotoPerfil.innerHTML = "";
             fotoPerfil.setAttribute("onclick", "irPerfil()");
             fotoPerfil.innerHTML = `<i class="bi bi-person-circle" cursor: pointer;" ></i>
-            <marquee direction="right">
+            <marquee direction="right" style="cursor: pointer;">
             
             <span cursor: pointer;">${nome}</span>
             </marquee>
@@ -164,27 +164,126 @@ function deslogar() {
     }
 }
 
-// function logadoHome() {
-//     var logado = localStorage.getItem("logado");
-//     var fotoPerfil = document.getElementById("fPerfil")
+function salvarItem() {
+    const input = document.getElementById("post");
+    const item = input.value.trim(); // Pega o valor do input e remove espaços extras
+    const nome = localStorage.getItem("nome"); // Obtém o nome armazenado no localStorage
 
-//     if(logado === true) {
-//         fotoPerfil.innerHTML = localStorage.getItem("fotoPerfil")
-//     } else {
-//         console.log("Usuário não está logado.");
+    if (item) {
+        // Gera um índice único para a chave do item
+        const index = localStorage.length; // A chave será o índice atual
+
+        // Cria o conteúdo HTML dinâmico com a interpolação correta
+        const htmlContent = `
+            <div class="publi2">
+                <div class="cima">
+                    <div class="lado_esquerdo">
+                        <i class="bi bi-person"></i>
+                        <h4>${nome}</h4>
+                    </div>
+                    <i class="bi bi-sliders"></i>
+                </div>
+                <div class="meio">
+                    <h1>${item}</h1>
+                </div>
+                <div class="baixo">
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-chat-left-text"></i>
+                    <i class="bi bi-share"></i>
+                </div>
+            </div>
+        `;
+
+        // Armazena o conteúdo HTML com a chave sendo um índice único
+        localStorage.setItem(`item_${index}`, htmlContent);
+
+        // Limpa o campo de input
+        input.value = '';
+
+        // Chama a função para exibir os itens
+        exibirItensLocalStorage();
+    }
+}
+
+function exibirItensLocalStorage() {
+    var espaçoPubli = document.getElementById("espaçoPublis");
+
+    // Verifica se o elemento existe no DOM
+    if (!espaçoPubli) {
+        console.error("Elemento com id 'espaçoPublis' não encontrado.");
+        return;
+    }
+
+    // Limpa o conteúdo atual antes de exibir os novos itens
+    espaçoPubli.innerHTML = '';
+
+    // Cria uma variável para acumular os itens HTML
+    let htmlContent = '';
+
+    // Itera sobre todos os itens do LocalStorage
+    for (let i = 0; i < localStorage.length; i++) {
+        const chave = localStorage.key(i); // Pega a chave do item
+        const valor = localStorage.getItem(chave); // Pega o valor (HTML) do item
+
+        // Acumula o conteúdo HTML
+        htmlContent += valor;
+    }
+
+    // Atualiza o conteúdo de espaçoPubli de uma vez só
+    espaçoPubli.innerHTML = htmlContent;
+}
+
+// Espera o DOM estar carregado antes de adicionar o listener
+document.addEventListener("DOMContentLoaded", function() {
+    // Adiciona o evento de clique ao botão de salvar
+    document.getElementById("saveButton").addEventListener("click", salvarItem);
+
+    // Chama a função para exibir os itens ao carregar a página
+    exibirItensLocalStorage();
+});
+
+
+
+
+
+
+
+
+// document.addEventListener("DOMContentLoaded", function() {
+//     function exibirItensLocalStorage() {
+//         var espaçoPubli = document.getElementById("espaçoPublis");
+
+//         // Verifique se o elemento existe antes de tentar acessar o innerHTML
+//         if (espaçoPubli) {
+//             // Limpa o conteúdo atual antes de exibir os novos itens
+//             espaçoPubli.innerHTML = '';
+
+//             // Cria uma variável para acumular os itens HTML
+//             let htmlContent = '';
+
+//             // Itera sobre todos os itens do LocalStorage
+//             for (let i = 0; i < localStorage.length; i++) {
+//                 const chave = localStorage.key(i); // Pega a chave do item
+//                 const valor = localStorage.getItem(chave); // Pega o valor (HTML) do item
+
+//                 // Acumula o conteúdo HTML
+//                 htmlContent += valor;
+//             }
+
+//             // Atualiza o conteúdo de espaçoPubli de uma vez só
+//             espaçoPubli.innerHTML = htmlContent;
+//         } else {
+//             console.error("Elemento com id 'espaçoPublis' não encontrado.");
+//         }
 //     }
+
+//     // Chama a função para exibir os itens
+//     exibirItensLocalStorage();
+// });
+
+
+// function postar() {
+    //     var post = document.getElementById("post")
+
+    
 // }
-
-// window.onload = function() {
-//     var logado = localStorage.getItem("logado");
-  
-//     if (logado === "true") {
-//       console.log("Usuário está logado.");
-//       logadoHome()
-//       // Aqui você pode fazer o que precisar para exibir informações do usuário, etc.
-//     } else {
-//       console.log("Usuário não está logado.");
-//       // Aqui você pode redirecionar para a página de login, se necessário
-      
-//     }
-//   }
