@@ -139,6 +139,7 @@ window.onload = function() {
     if (logado === "true") {
         console.log("Usuário está logado.");
         logadoHome();
+        atualizarNome()
         // Aqui você pode fazer o que precisar para exibir informações do usuário, etc.
     } else {
         console.log("Usuário não está logado.");
@@ -164,44 +165,102 @@ function deslogar() {
     }
 }
 
+
+
+function atualizarNome() {
+    var foto = localStorage.getItem("fotoPerfil");
+    var nome = localStorage.getItem("nome");
+
+    var LE = document.getElementsByClassName("lado_esquerdo");
+
+    // Verifica se há elementos com a classe "lado_esquerdo"
+    if (LE.length > 0) {
+        for (let i = 0; i < LE.length; i++) {
+            LE[i].innerHTML = `<img src="${foto}" alt="Foto de perfil">
+                               <h4>${nome ? nome : 'Usuário'}</h4>`;
+        }
+    }
+    
+}
+
+
 function salvarItem() {
+    var foto = localStorage.getItem("fotoPerfil")
     const input = document.getElementById("post");
     const item = input.value.trim(); // Pega o valor do input e remove espaços extras
     const nome = localStorage.getItem("nome"); // Obtém o nome armazenado no localStorage
 
+    
+
     if (item) {
-        // Gera um índice único para a chave do item
-        const index = localStorage.length; // A chave será o índice atual
-
-        // Cria o conteúdo HTML dinâmico com a interpolação correta
-        const htmlContent = `
-            <div class="publi2">
-                <div class="cima">
-                    <div class="lado_esquerdo">
-                        <i class="bi bi-person"></i>
-                        <h4>${nome}</h4>
+        if(foto) {
+            console.log("olaaaaaaaaaaaa")
+            // Gera um índice único para a chave do item
+            const index = localStorage.length; // A chave será o índice atual
+    
+            // Cria o conteúdo HTML dinâmico com a interpolação correta
+            const htmlContent = `
+                <div class="publi2">
+                    <div class="cima">
+                        <div class="lado_esquerdo" id="LE">
+                            
+                        </div>
+                        <i class="bi bi-sliders"></i>
                     </div>
-                    <i class="bi bi-sliders"></i>
+                    <div class="meio">
+                        <h1>${item}</h1>
+                    </div>
+                    <div class="baixo">
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-chat-left-text"></i>
+                        <i class="bi bi-share"></i>
+                    </div>
                 </div>
-                <div class="meio">
-                    <h1>${item}</h1>
+            `;
+    
+            // Armazena o conteúdo HTML com a chave sendo um índice único
+            localStorage.setItem(`item_${index}`, htmlContent);
+    
+            // Limpa o campo de input
+            input.value = '';
+    
+            // Chama a função para exibir os itens
+            // exibirItensLocalStorage();
+        } else {
+            console.log("ola")
+            // Gera um índice único para a chave do item
+            const index = localStorage.length; // A chave será o índice atual
+    
+            // Cria o conteúdo HTML dinâmico com a interpolação correta
+            const htmlContent = `
+                <div class="publi2">
+                    <div class="cima">
+                        <div class="lado_esquerdo" id="LE">
+                            <i class="bi bi-person"></i>
+                            <h4>${nome}</h4>
+                        </div>
+                        <i class="bi bi-sliders"></i>
+                    </div>
+                    <div class="meio">
+                        <h1>${item}</h1>
+                    </div>
+                    <div class="baixo">
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-chat-left-text"></i>
+                        <i class="bi bi-share"></i>
+                    </div>
                 </div>
-                <div class="baixo">
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-chat-left-text"></i>
-                    <i class="bi bi-share"></i>
-                </div>
-            </div>
-        `;
-
-        // Armazena o conteúdo HTML com a chave sendo um índice único
-        localStorage.setItem(`item_${index}`, htmlContent);
-
-        // Limpa o campo de input
-        input.value = '';
-
-        // Chama a função para exibir os itens
-        exibirItensLocalStorage();
+            `;
+    
+            // Armazena o conteúdo HTML com a chave sendo um índice único
+            localStorage.setItem(`item_${index}`, htmlContent);
+    
+            // Limpa o campo de input
+            input.value = '';
+    
+            // Chama a função para exibir os itens
+            // exibirItensLocalStorage();
+        }
     }
 }
 
@@ -233,6 +292,7 @@ function exibirItensLocalStorage() {
 
     // Atualiza o conteúdo de espaçoPubli de uma vez só
     espaçoPubli.innerHTML = htmlContent;
+    // location.reload();
 }
 
 
